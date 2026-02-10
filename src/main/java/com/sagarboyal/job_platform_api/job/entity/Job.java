@@ -42,7 +42,7 @@ public class Job {
 
     private Integer totalVacancies;
 
-    private LocalDate applyStartDate;
+    private LocalDate startDate;
 
     @Column(name = "last_date")
     private LocalDate lastDate;
