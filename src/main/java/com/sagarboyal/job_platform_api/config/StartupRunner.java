@@ -1,7 +1,6 @@
 package com.sagarboyal.job_platform_api.config;
 
-import com.sagarboyal.job_platform_api.aggregator.providers.JobProvider;
-import lombok.RequiredArgsConstructor;
+import com.sagarboyal.job_platform_api.scrapper.providers.JobProvider;
 import org.jspecify.annotations.NonNull;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;

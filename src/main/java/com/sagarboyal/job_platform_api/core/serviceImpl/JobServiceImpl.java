@@ -1,11 +1,11 @@
-package com.sagarboyal.job_platform_api.job.serviceImpl;
+package com.sagarboyal.job_platform_api.core.serviceImpl;
 
-import com.sagarboyal.job_platform_api.job.dto.JobDto;
-import com.sagarboyal.job_platform_api.job.entity.Job;
-import com.sagarboyal.job_platform_api.job.mapper.JobMapper;
-import com.sagarboyal.job_platform_api.job.repository.JobRepository;
-import com.sagarboyal.job_platform_api.job.service.JobService;
-import com.sagarboyal.job_platform_api.job.util.JobCodeGenerator;
+import com.sagarboyal.job_platform_api.core.dto.JobDto;
+import com.sagarboyal.job_platform_api.core.entity.Job;
+import com.sagarboyal.job_platform_api.core.mapper.JobMapper;
+import com.sagarboyal.job_platform_api.core.repository.JobRepository;
+import com.sagarboyal.job_platform_api.core.service.JobService;
+import com.sagarboyal.job_platform_api.core.utils.JobCodeGenerator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

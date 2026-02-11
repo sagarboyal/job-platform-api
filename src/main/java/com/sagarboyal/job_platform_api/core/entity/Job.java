@@ -1,4 +1,4 @@
-package com.sagarboyal.job_platform_api.job.entity;
+package com.sagarboyal.job_platform_api.core.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

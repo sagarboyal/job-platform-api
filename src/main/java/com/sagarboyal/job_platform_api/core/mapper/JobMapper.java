@@ -1,7 +1,7 @@
-package com.sagarboyal.job_platform_api.job.mapper;
+package com.sagarboyal.job_platform_api.core.mapper;
 
-import com.sagarboyal.job_platform_api.job.dto.JobDto;
-import com.sagarboyal.job_platform_api.job.entity.Job;
+import com.sagarboyal.job_platform_api.core.dto.JobDto;
+import com.sagarboyal.job_platform_api.core.entity.Job;
 import org.springframework.stereotype.Component;
 
 @Component

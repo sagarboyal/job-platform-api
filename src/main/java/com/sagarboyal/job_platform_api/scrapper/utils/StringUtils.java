@@ -1,4 +1,4 @@
-package com.sagarboyal.job_platform_api.aggregator.utils;
+package com.sagarboyal.job_platform_api.scrapper.utils;
 
 import org.springframework.stereotype.Component;
 

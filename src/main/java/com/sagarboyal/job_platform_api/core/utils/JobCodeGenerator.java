@@ -1,6 +1,6 @@
-package com.sagarboyal.job_platform_api.job.util;
+package com.sagarboyal.job_platform_api.core.utils;
 
-import com.sagarboyal.job_platform_api.job.dto.JobDto;
+import com.sagarboyal.job_platform_api.core.dto.JobDto;
 import org.springframework.stereotype.Component;
 
 @Component

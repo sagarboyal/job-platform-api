@@ -1,7 +1,8 @@
-package com.sagarboyal.job_platform_api.aggregator.providers.ncs;
+package com.sagarboyal.job_platform_api.scrapper.providers.ncs;
 
-import com.sagarboyal.job_platform_api.aggregator.config.JobProviderProperties;
-import com.sagarboyal.job_platform_api.aggregator.providers.JobProvider;
+import com.sagarboyal.job_platform_api.scrapper.config.JobProviderProperties;
+import com.sagarboyal.job_platform_api.scrapper.payload.NCSResponse;
+import com.sagarboyal.job_platform_api.scrapper.providers.JobProvider;
 import lombok.RequiredArgsConstructor;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

@@ -1,9 +1,10 @@
-package com.sagarboyal.job_platform_api.aggregator.providers.railway;
+package com.sagarboyal.job_platform_api.scrapper.providers.railway;
 
 
-import com.sagarboyal.job_platform_api.aggregator.config.JobProviderProperties;
-import com.sagarboyal.job_platform_api.aggregator.providers.JobProvider;
-import com.sagarboyal.job_platform_api.aggregator.utils.StringUtils;
+import com.sagarboyal.job_platform_api.scrapper.config.JobProviderProperties;
+import com.sagarboyal.job_platform_api.scrapper.payload.RailwayJobResponse;
+import com.sagarboyal.job_platform_api.scrapper.providers.JobProvider;
+import com.sagarboyal.job_platform_api.scrapper.utils.StringUtils;
 import lombok.RequiredArgsConstructor;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

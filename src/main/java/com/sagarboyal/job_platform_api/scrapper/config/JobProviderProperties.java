@@ -1,4 +1,4 @@
-package com.sagarboyal.job_platform_api.aggregator.config;
+package com.sagarboyal.job_platform_api.scrapper.config;
 
 import lombok.Getter;
 import lombok.Setter;

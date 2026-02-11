@@ -1,4 +1,4 @@
-package com.sagarboyal.job_platform_api.aggregator.providers.ncs;
+package com.sagarboyal.job_platform_api.scrapper.payload;
 
 import lombok.Builder;
 

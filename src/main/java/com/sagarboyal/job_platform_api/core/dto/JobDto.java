@@ -1,7 +1,7 @@
-package com.sagarboyal.job_platform_api.job.dto;
+package com.sagarboyal.job_platform_api.core.dto;
 
-import com.sagarboyal.job_platform_api.job.entity.EmploymentType;
-import com.sagarboyal.job_platform_api.job.entity.JobStatus;
+import com.sagarboyal.job_platform_api.core.entity.EmploymentType;
+import com.sagarboyal.job_platform_api.core.entity.JobStatus;
 import lombok.Builder;
 
 import java.time.LocalDate;
