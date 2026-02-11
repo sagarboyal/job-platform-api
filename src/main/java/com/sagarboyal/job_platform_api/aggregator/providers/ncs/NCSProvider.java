@@ -1,23 +1,34 @@
 package com.sagarboyal.job_platform_api.aggregator.providers.ncs;
 
+import com.sagarboyal.job_platform_api.aggregator.config.JobProviderProperties;
 import com.sagarboyal.job_platform_api.aggregator.providers.JobProvider;
+import lombok.RequiredArgsConstructor;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 
-@Component
+@Service
+@Primary
+@RequiredArgsConstructor
 public class NCSProvider implements JobProvider {
+    private final JobProviderProperties properties;
 
     @Override
     public List<NCSResponse> getJobLists() throws IOException {
-        Document doc = Jsoup.connect("https://www.ncs.gov.in/pages/govt-job-vacancies.aspx")
+        String URL = properties
+            .getProviders()
+            .get("ncs")
+            .getUrl();
+
+        Document doc = Jsoup.connect(URL)
                 .userAgent("Mozilla/5.0")
                 .get();
 
