@@ -1,3 +1,48 @@
 spring:
   application:
     name: job-platform-api
+
+  datasource:
+    url: jdbc:h2:mem:test
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+app:
+  job-providers:
+    providers:
+      railway:
+        enabled: true
+        regions:
+          kolkata:
+            enabled: true
+            url: "https://www.rrbkolkata.gov.in"
+          siliguri:
+            enabled: true
+            url: "https://www.rrbsiliguri.gov.in/english/index.html"
+          mumbai:
+            enabled: true
+            url: "https://www.rrbmumbai.gov.in"
+      ncs:
+        enabled: true
+        url: "https://www.ncs.gov.in/pages/govt-job-vacancies.aspx"
+      upsc:
+        enabled: true
+        url: "https://www.upsc.gov.in"
+      ssc:
+        enabled: false
+        url: "https://ssc.nic.in"
