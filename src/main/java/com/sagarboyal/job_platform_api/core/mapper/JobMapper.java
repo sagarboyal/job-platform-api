@@ -22,9 +22,11 @@ public class JobMapper {
         job.setTotalVacancies(jobDto.totalVacancies());
         job.setStartDate(jobDto.startDate());
         job.setLastDate(jobDto.lastDate());
+        job.setPostedDate(jobDto.postedDate());
 
         job.setOfficialNotificationUrl(jobDto.officialNotificationUrl());
         job.setSourceUrl(jobDto.sourceUrl());
+        job.setProviderUrl(jobDto.providerUrl());
 
         job.setDescription(jobDto.description());
         job.setStatus(jobDto.status());
@@ -52,8 +54,10 @@ public class JobMapper {
                 .totalVacancies(job.getTotalVacancies())
                 .startDate(job.getStartDate())
                 .lastDate(job.getLastDate())
+                .postedDate(job.getPostedDate())
                 .officialNotificationUrl(job.getOfficialNotificationUrl())
                 .sourceUrl(job.getSourceUrl())
+                .providerUrl(job.getProviderUrl())
                 .description(job.getDescription())
                 .status(job.getStatus())
                 .category(job.getCategory())

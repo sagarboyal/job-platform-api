@@ -43,15 +43,15 @@ public class Job {
     private Integer totalVacancies;
 
     private LocalDate startDate;
-
-    @Column(name = "last_date")
     private LocalDate lastDate;
+    private LocalDate postedDate;
 
     @Column(length = 1000)
     private String officialNotificationUrl;
-
-    @Column(nullable = false, unique = true, length = 1000)
+    @Column(nullable = false, length = 1000)
     private String sourceUrl;
+    @Column(nullable = false, length = 1000)
+    private String providerUrl;
 
     @Column(length = 3000)
     private String description;
