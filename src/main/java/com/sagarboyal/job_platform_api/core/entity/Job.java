@@ -13,7 +13,11 @@ import java.time.LocalDateTime;
                 @Index(name = "idx_jobs_provider", columnList = "provider_name"),
                 @Index(name = "idx_jobs_last_date", columnList = "last_date"),
                 @Index(name = "idx_jobs_status", columnList = "status")
-        })
+        },
+        uniqueConstraints = @UniqueConstraint(
+                name = "uk_provider_ad_no",
+                columnNames = {"provider_name", "advertisement_no"}
+        ))
 @Getter
 @Setter
 @NoArgsConstructor
@@ -48,7 +52,7 @@ public class Job {
 
     @Column(length = 1000)
     private String officialNotificationUrl;
-    @Column(nullable = false, length = 1000)
+    @Column(length = 1000)
     private String sourceUrl;
     @Column(nullable = false, length = 1000)
     private String providerUrl;
