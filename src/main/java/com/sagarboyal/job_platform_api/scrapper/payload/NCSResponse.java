@@ -8,6 +8,7 @@ public record NCSResponse(
         String ministry,
         String department,
         String homePage,
-        String recruitmentPage
+        String recruitmentPage,
+        String providerUrl
 ) {
 }

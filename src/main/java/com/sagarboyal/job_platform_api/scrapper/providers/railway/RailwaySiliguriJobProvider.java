@@ -1,6 +1,7 @@
 package com.sagarboyal.job_platform_api.scrapper.providers.railway;
 
 
+import com.sagarboyal.job_platform_api.core.dto.JobDto;
 import com.sagarboyal.job_platform_api.scrapper.config.JobProviderProperties;
 import com.sagarboyal.job_platform_api.scrapper.payload.RailwayJobResponse;
 import com.sagarboyal.job_platform_api.scrapper.providers.JobProvider;
@@ -26,11 +27,12 @@ public class RailwaySiliguriJobProvider implements JobProvider {
 
     @Override
     public List<?> getJobLists() throws IOException {
+
         String URL = properties.getProviders()
-                .get("railway")
-                .getRegions()
-                .get("siliguri")
-                .getUrl();
+            .get("railway")
+            .getRegions()
+            .get("siliguri")
+            .getUrl();
 
         Document doc = Jsoup.connect(URL)
                 .userAgent("Mozilla/5.0")
@@ -38,33 +40,58 @@ public class RailwaySiliguriJobProvider implements JobProvider {
 
         Elements elements = doc.select(".highlightNews");
         Elements subDivs = elements.select("div.subsecBlock");
-        List<RailwayJobResponse> results = new ArrayList<>();
+        List<JobDto> results = new ArrayList<>();
         for(Element subDiv : subDivs){
             Elements header = subDiv.select("div.subsecBlockHead");
             Elements body = subDiv.select("div.subsecBlockBody");
-
-            Elements title = body.select("div.category");
-            Elements description = body.select("u");
-
-            System.out.println(title.text());
-            Elements link = body.select("a[href]");
-            String href = link.attr("href");
-            if(href.endsWith(".pdf")) href = "https://www.rrbsiliguri.gov.in/english" + href.substring(1);
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
             Elements publishDate = body.select("span");
             String datePart = publishDate.text().replaceAll("[^0-9\\-]", ""); // "29-08-2024"
             LocalDate date = LocalDate.parse(datePart, formatter);
 
-            results.add(RailwayJobResponse.builder()
+            LocalDate cutoff = LocalDate.of(2026, 1, 1);
+            if (date.isBefore(cutoff)) break;
+
+            Elements title = body.select("div.category");
+            Elements description = body.select("u");
+
+            Elements link = body.select("a[href]");
+            String href = link.attr("href");
+            if(href.endsWith(".pdf")) href = "https://www.rrbsiliguri.gov.in/english" + href.substring(1);
+
+            String descriptionText =
+                    stringUtils.cleanText(description.text())
+                            + "\nJob ID: "
+                            + stringUtils.cleanText(header.text());
+
+            RailwayJobResponse response = RailwayJobResponse.builder()
                     .jobId(stringUtils.cleanText(header.text()))
                     .title(stringUtils.cleanText(title.text()))
-                    .description(stringUtils.cleanText(description.text()))
+                    .description(descriptionText)
                     .postedDate(date.toString())
                     .link(href)
-                    .build());
+                    .providerUrl(URL)
+                    .build();
 
+            results.add(convertToJobDto(response));
         }
         return results;
+    }
+
+    @Override
+    public String providerName() {
+        return "railway-siliguri";
+    }
+
+    private JobDto convertToJobDto(RailwayJobResponse response) {
+        return JobDto.builder()
+                .title(response.title())
+                .description(response.description())
+                .officialNotificationUrl(response.link())
+                .providerUrl(response.providerUrl())
+                .providerName("Railway Siliguri")
+                .postedDate(LocalDate.parse(response.postedDate()))
+                .build();
     }
 }

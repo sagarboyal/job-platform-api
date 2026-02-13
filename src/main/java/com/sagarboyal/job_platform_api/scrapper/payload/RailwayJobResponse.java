@@ -8,6 +8,7 @@ public record RailwayJobResponse(
         String title,
         String description,
         String link,
-        String postedDate
+        String postedDate,
+        String providerUrl
 ) {
 }

@@ -5,4 +5,5 @@ import java.util.List;
 
 public interface JobProvider {
     List<?> getJobLists() throws IOException;
+    String providerName();
 }
