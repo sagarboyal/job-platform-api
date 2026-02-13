@@ -1,6 +1,9 @@
-package com.sagarboyal.job_platform_api.scrapper.utils;
+package com.sagarboyal.job_platform_api.utils;
 
 import org.springframework.stereotype.Component;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Component
 public class StringUtils {
@@ -28,5 +31,23 @@ public class StringUtils {
 
         return cleaned.trim();
     }
+
+    public String cleanURL(String text) {
+        if (text == null || text.isBlank()) return "";
+
+        Matcher matcher = Pattern
+                .compile("(https?://\\S+)", Pattern.CASE_INSENSITIVE)
+                .matcher(text.trim());
+
+        return matcher.find() ? matcher.group(1) : "";
+    }
+
+    public String cleanDescription(String text) {
+        if (text == null || text.isBlank() || text.trim().isEmpty()) {
+            return "No description available. Please refer to the official notification link below for complete details.";
+        }
+        return text.replaceAll("\\s+", " ").trim();
+    }
+
 
 }
