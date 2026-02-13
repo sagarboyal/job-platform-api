@@ -5,7 +5,7 @@ import com.sagarboyal.job_platform_api.core.dto.JobDto;
 import com.sagarboyal.job_platform_api.scrapper.config.JobProviderProperties;
 import com.sagarboyal.job_platform_api.scrapper.payload.RailwayJobResponse;
 import com.sagarboyal.job_platform_api.scrapper.providers.JobProvider;
-import com.sagarboyal.job_platform_api.scrapper.utils.StringUtils;
+import com.sagarboyal.job_platform_api.utils.StringUtils;
 import lombok.RequiredArgsConstructor;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -26,7 +26,7 @@ public class RailwaySiliguriJobProvider implements JobProvider {
     private final StringUtils stringUtils;
 
     @Override
-    public List<?> getJobLists() throws IOException {
+    public List<JobDto> getJobLists() throws IOException {
 
         String URL = properties.getProviders()
             .get("railway")
@@ -60,10 +60,12 @@ public class RailwaySiliguriJobProvider implements JobProvider {
             String href = link.attr("href");
             if(href.endsWith(".pdf")) href = "https://www.rrbsiliguri.gov.in/english" + href.substring(1);
 
-            String descriptionText =
-                    stringUtils.cleanText(description.text())
-                            + "\nJob ID: "
-                            + stringUtils.cleanText(header.text());
+            String descText = stringUtils.cleanText(description.text());
+            String jobId = stringUtils.cleanText(header.text());
+
+            String descriptionText = descText.isBlank()
+                    ? "Job ID: " + jobId
+                    : descText + "\nJob ID: " + jobId;
 
             RailwayJobResponse response = RailwayJobResponse.builder()
                     .jobId(stringUtils.cleanText(header.text()))
@@ -90,7 +92,7 @@ public class RailwaySiliguriJobProvider implements JobProvider {
                 .description(response.description())
                 .officialNotificationUrl(response.link())
                 .providerUrl(response.providerUrl())
-                .providerName("Railway Siliguri")
+                .providerName("RAILWAY-SILIGURI")
                 .postedDate(LocalDate.parse(response.postedDate()))
                 .build();
     }
