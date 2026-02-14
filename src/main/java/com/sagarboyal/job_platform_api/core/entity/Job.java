@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
         indexes = {
                 @Index(name = "idx_advertisement_no", columnList = "advertisement_no"),
                 @Index(name = "idx_jobs_provider", columnList = "provider_name"),
-                @Index(name = "idx_jobs_last_date", columnList = "last_date"),
                 @Index(name = "idx_jobs_status", columnList = "status")
         },
         uniqueConstraints = @UniqueConstraint(
