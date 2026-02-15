@@ -17,31 +17,6 @@ spring:
         format_sql: true
         dialect: org.hibernate.dialect.PostgreSQLDialect
 
-app:
-  job-providers:
-    providers:
-      railway:
-        enabled: true
-        regions:
-          kolkata:
-            enabled: true
-            url: "https://www.rrbkolkata.gov.in"
-          siliguri:
-            enabled: true
-            url: "https://www.rrbsiliguri.gov.in/english/index.html"
-          mumbai:
-            enabled: true
-            url: "https://www.rrbmumbai.gov.in"
-      ncs:
-        enabled: true
-        url: "https://www.ncs.gov.in/pages/govt-job-vacancies.aspx"
-      upsc:
-        enabled: true
-        url: "https://www.upsc.gov.in"
-      ssc:
-        enabled: false
-        url: "https://ssc.nic.in"
-
 logging:
   level:
     org.flywaydb: DEBUG

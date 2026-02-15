@@ -1,9 +1,10 @@
 package com.sagarboyal.job_platform_api.scrapper.providers.ncs;
 
 import com.sagarboyal.job_platform_api.core.dto.JobDto;
-import com.sagarboyal.job_platform_api.scrapper.config.JobProviderProperties;
-import com.sagarboyal.job_platform_api.scrapper.payload.NCSResponse;
+import com.sagarboyal.job_platform_api.scrapper.payload.dtos.ProviderDTO;
+import com.sagarboyal.job_platform_api.scrapper.payload.response.NCSResponse;
 import com.sagarboyal.job_platform_api.scrapper.providers.JobProvider;
+import com.sagarboyal.job_platform_api.scrapper.service.ProviderService;
 import com.sagarboyal.job_platform_api.utils.StringUtils;
 import lombok.RequiredArgsConstructor;
 import org.jsoup.Jsoup;
@@ -22,16 +23,15 @@ import java.util.List;
 @Primary
 @RequiredArgsConstructor
 public class NCSProvider implements JobProvider {
-    private final JobProviderProperties properties;
     private final StringUtils stringUtils;
+    private final ProviderService providerService;
 
     @Override
     public List<JobDto> getJobLists() throws IOException {
+        ProviderDTO providerDTO = providerService.getByName("NCS");
+        String URL = providerDTO.url();
 
-        String URL = properties
-            .getProviders()
-            .get("ncs")
-            .getUrl();
+        if(!providerDTO.active()) return null;
 
         Document doc = Jsoup.connect(URL)
                 .userAgent("Mozilla/5.0")

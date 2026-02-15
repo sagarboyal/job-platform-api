@@ -1,4 +1,4 @@
-package com.sagarboyal.job_platform_api.scrapper.payload;
+package com.sagarboyal.job_platform_api.scrapper.payload.response;
 
 import lombok.Builder;
 
