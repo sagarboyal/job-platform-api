@@ -25,9 +25,9 @@ public class Provider {
     @Column(nullable=false, length = 1000)
     private String url;
 
-    private boolean active;
+    private Boolean active;
 
-    private int frequencyMinutes;
+    private Integer frequencyMinutes;
 
     private LocalDateTime updatedAt;
 
@@ -35,6 +35,7 @@ public class Provider {
     public void prePersist() {
         active = true;
         frequencyMinutes = 60;
+        updatedAt = LocalDateTime.now();
     }
 
     @PreUpdate

@@ -1,7 +1,7 @@
 package com.sagarboyal.job_platform_api.scrapper.mapper;
 
 import com.sagarboyal.job_platform_api.scrapper.modal.Provider;
-import com.sagarboyal.job_platform_api.scrapper.payload.ProviderDTO;
+import com.sagarboyal.job_platform_api.scrapper.payload.dtos.ProviderDTO;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -25,7 +25,7 @@ public class ProviderMapper {
                 .name(provider.getName())
                 .fullName(provider.getFullName())
                 .url(provider.getUrl())
-                .active(provider.isActive())
+                .active(provider.getActive())
                 .frequencyMinutes(provider.getFrequencyMinutes())
                 .updateAt(provider.getUpdatedAt())
                 .build();
