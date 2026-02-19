@@ -22,8 +22,14 @@ public class Provider {
     @Column(nullable=false, unique=true)
     private String fullName;
 
+    @Column(columnDefinition = "TEXT")
+    private String description;
+
     @Column(nullable=false, length = 1000)
     private String url;
+
+    @Column(length = 1000)
+    private String imageUrl;
 
     private Boolean active;
 

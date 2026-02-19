@@ -9,7 +9,9 @@ public record ProviderDTO(
         Long id,
         String name,
         String fullName,
+        String description,
         String url,
+        String imageUrl,
         Boolean active,
         Integer frequencyMinutes,
         LocalDateTime updateAt

@@ -12,7 +12,9 @@ public class ProviderMapper {
         provider.setId(dto.id());
         provider.setName(dto.name());
         provider.setFullName(dto.fullName());
+        provider.setDescription(dto.description());
         provider.setUrl(dto.url());
+        provider.setImageUrl(dto.imageUrl());
         provider.setActive(dto.active());
         provider.setFrequencyMinutes(dto.frequencyMinutes());
         provider.setUpdatedAt(dto.updateAt());
@@ -24,7 +26,9 @@ public class ProviderMapper {
                 .id(provider.getId())
                 .name(provider.getName())
                 .fullName(provider.getFullName())
+                .description(provider.getDescription())
                 .url(provider.getUrl())
+                .imageUrl(provider.getImageUrl())
                 .active(provider.getActive())
                 .frequencyMinutes(provider.getFrequencyMinutes())
                 .updateAt(provider.getUpdatedAt())

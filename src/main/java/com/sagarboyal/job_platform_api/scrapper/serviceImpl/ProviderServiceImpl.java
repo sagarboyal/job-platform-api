@@ -60,6 +60,12 @@ public class ProviderServiceImpl implements ProviderService {
                         provider.getFullName(),
                         dto.fullName())
         );
+        provider.setDescription(
+                AppUtils.keepOldIfUnchanged(
+                        provider.getDescription(),
+                        dto.description()
+                )
+        );
         provider.setUrl(AppUtils
                 .keepOldIfUnchanged(
                         provider.getUrl(),
