@@ -1,0 +1,5 @@
+ALTER TABLE providers
+    ADD COLUMN IF NOT EXISTS description TEXT;
+
+ALTER TABLE providers
+    ADD COLUMN IF NOT EXISTS image_url VARCHAR(1000);

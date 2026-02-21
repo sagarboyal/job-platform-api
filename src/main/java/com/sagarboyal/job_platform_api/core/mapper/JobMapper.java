@@ -12,29 +12,29 @@ public class JobMapper {
         if (jobDto == null) return null;
 
         Job job = new Job();
-        job.setId(jobDto.id());
-        job.setAdvertisementNo(jobDto.advertisementNo());
-        job.setTitle(jobDto.title());
-        job.setOrganization(jobDto.organization());
-        job.setProviderName(jobDto.providerName());
-        job.setJobLocation(jobDto.jobLocation());
-        job.setQualification(jobDto.qualification());
-        job.setTotalVacancies(jobDto.totalVacancies());
-        job.setStartDate(jobDto.startDate());
-        job.setLastDate(jobDto.lastDate());
-        job.setPostedDate(jobDto.postedDate());
+        job.setId(jobDto.getId());
+        job.setAdvertisementNo(jobDto.getAdvertisementNo());
+        job.setTitle(jobDto.getTitle());
+        job.setOrganization(jobDto.getOrganization());
+        job.setProviderName(jobDto.getProviderName());
+        job.setJobLocation(jobDto.getJobLocation());
+        job.setQualification(jobDto.getQualification());
+        job.setTotalVacancies(jobDto.getTotalVacancies());
+        job.setStartDate(jobDto.getStartDate());
+        job.setLastDate(jobDto.getLastDate());
+        job.setPostedDate(jobDto.getPostedDate());
 
-        job.setOfficialNotificationUrl(jobDto.officialNotificationUrl());
-        job.setSourceUrl(jobDto.sourceUrl());
-        job.setProviderUrl(jobDto.providerUrl());
+        job.setOfficialNotificationUrl(jobDto.getOfficialNotificationUrl());
+        job.setSourceUrl(jobDto.getSourceUrl());
+        job.setProviderUrl(jobDto.getProviderUrl());
 
-        job.setDescription(jobDto.description());
-        job.setStatus(jobDto.status());
-        job.setCategory(jobDto.category());
-        job.setEmploymentType(jobDto.employmentType());
+        job.setDescription(jobDto.getDescription());
+        job.setStatus(jobDto.getStatus());
+        job.setCategory(jobDto.getCategory());
+        job.setEmploymentType(jobDto.getEmploymentType());
 
-        job.setCreatedAt(jobDto.createdAt());
-        job.setUpdatedAt(jobDto.updatedAt());
+        job.setCreatedAt(jobDto.getCreatedAt());
+        job.setUpdatedAt(jobDto.getUpdatedAt());
 
         return job;
     }

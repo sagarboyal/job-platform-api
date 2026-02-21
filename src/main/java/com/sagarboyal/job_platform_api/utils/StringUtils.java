@@ -49,5 +49,7 @@ public class StringUtils {
         return text.replaceAll("\\s+", " ").trim();
     }
 
-
+    public boolean isBlank(String text) {
+        return text == null || text.isBlank();
+    }
 }

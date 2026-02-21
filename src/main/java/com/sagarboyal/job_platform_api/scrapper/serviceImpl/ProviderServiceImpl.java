@@ -1,15 +1,17 @@
 package com.sagarboyal.job_platform_api.scrapper.serviceImpl;
 
+import com.sagarboyal.job_platform_api.exception.custom.APIExceptions;
 import com.sagarboyal.job_platform_api.scrapper.mapper.ProviderMapper;
 import com.sagarboyal.job_platform_api.scrapper.modal.Provider;
-import com.sagarboyal.job_platform_api.scrapper.payload.ProviderDTO;
+import com.sagarboyal.job_platform_api.scrapper.payload.dtos.ProviderDTO;
 import com.sagarboyal.job_platform_api.scrapper.repository.ProviderRepository;
 import com.sagarboyal.job_platform_api.scrapper.service.ProviderService;
 import com.sagarboyal.job_platform_api.utils.AppUtils;
+import com.sagarboyal.job_platform_api.utils.StringUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.security.InvalidParameterException;
 import java.util.List;
 
 @Service
@@ -17,9 +19,26 @@ import java.util.List;
 public class ProviderServiceImpl implements ProviderService {
     private final ProviderRepository providerRepository;
     private final ProviderMapper providerMapper;
+    private final StringUtils stringUtils;
 
     @Override
     public ProviderDTO create(ProviderDTO providerDTO) {
+        if (stringUtils.isBlank(providerDTO.name())) {
+            throw new APIExceptions("Provider name is required");
+        }
+
+        if (stringUtils.isBlank(providerDTO.fullName())) {
+            throw new APIExceptions("Provider full name is required");
+        }
+
+        if (stringUtils.isBlank(providerDTO.url())) {
+            throw new APIExceptions("Provider URL is required");
+        }
+
+        if(providerRepository.existsByNameAndUrl(providerDTO.name(), providerDTO.url())) {
+            throw new APIExceptions("Provider already exists");
+        }
+
         Provider provider = providerMapper.toEntity(providerDTO);
         return providerMapper.toResponse(providerRepository.save(provider));
     }
@@ -27,7 +46,7 @@ public class ProviderServiceImpl implements ProviderService {
     @Override
     public ProviderDTO update(ProviderDTO dto) {
         if(dto.id() == null){
-            throw new InvalidParameterException("id is null");
+            throw new APIExceptions("id is required");
         }
 
         Provider provider = findById(dto.id());
@@ -40,6 +59,12 @@ public class ProviderServiceImpl implements ProviderService {
                 .keepOldIfUnchanged(
                         provider.getFullName(),
                         dto.fullName())
+        );
+        provider.setDescription(
+                AppUtils.keepOldIfUnchanged(
+                        provider.getDescription(),
+                        dto.description()
+                )
         );
         provider.setUrl(AppUtils
                 .keepOldIfUnchanged(
@@ -76,7 +101,7 @@ public class ProviderServiceImpl implements ProviderService {
     @Override
     public void toggleStatus(Long id) {
         Provider data = findById(id);
-        data.setActive(!data.isActive());
+        data.setActive(!data.getActive());
         providerRepository.save(data);
     }
 
@@ -88,8 +113,16 @@ public class ProviderServiceImpl implements ProviderService {
                 .toList();
     }
 
+    @Override
+    public ProviderDTO getByName(String name) {
+        return providerMapper.toResponse(
+                providerRepository.findByName(name)
+                        .orElseThrow(() -> new APIExceptions("Provider not found"))
+                );
+    }
+
     private Provider findById(Long id) {
         return providerRepository.findById(id)
-                .orElseThrow( () -> new RuntimeException( "No provider with id " + id + " found." ) );
+                .orElseThrow(() -> new APIExceptions( "No provider with id " + id + " found.", HttpStatus.NOT_FOUND) );
     }
 }

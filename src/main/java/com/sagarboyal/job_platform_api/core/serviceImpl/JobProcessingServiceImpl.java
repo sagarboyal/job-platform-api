@@ -26,6 +26,11 @@ public class JobProcessingServiceImpl implements JobProcessingService {
             log.info("▶ Starting provider: {}", providerName);
             try {
                 List<JobDto> jobs = provider.getJobLists();
+
+                if (jobs == null || jobs.isEmpty()) {
+                    log.info("No jobs found for provider. Skipping...");
+                    continue;
+                }
                 log.info("Fetched {} jobs from provider {}", jobs.size(), providerName);
 
                 List<JobDto> saved = jobService.addBulkJobs(jobs);

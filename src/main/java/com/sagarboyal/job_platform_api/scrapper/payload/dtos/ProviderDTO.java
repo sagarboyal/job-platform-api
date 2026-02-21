@@ -1,7 +1,6 @@
-package com.sagarboyal.job_platform_api.scrapper.payload;
+package com.sagarboyal.job_platform_api.scrapper.payload.dtos;
 
 import lombok.Builder;
-import lombok.Getter;
 
 import java.time.LocalDateTime;
 
@@ -10,8 +9,10 @@ public record ProviderDTO(
         Long id,
         String name,
         String fullName,
+        String description,
         String url,
-        boolean active,
+        String imageUrl,
+        Boolean active,
         Integer frequencyMinutes,
         LocalDateTime updateAt
 ) {
