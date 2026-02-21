@@ -1,5 +1,6 @@
 package com.sagarboyal.job_platform_api.scrapper.controller;
 
+import com.sagarboyal.job_platform_api.core.service.JobProcessingService;
 import com.sagarboyal.job_platform_api.scrapper.payload.dtos.ProviderDTO;
 import com.sagarboyal.job_platform_api.scrapper.service.ProviderService;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProviderController {
     private final ProviderService providerService;
+    private final JobProcessingService jobProcessingService;
 
     @GetMapping
     public ResponseEntity<List<ProviderDTO>> getAllProviders() {
@@ -43,6 +45,12 @@ public class ProviderController {
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteProvider(@PathVariable Long id) {
         providerService.delete(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("test")
+    public ResponseEntity<Void> getAllProvidersByName() {
+        jobProcessingService.processJobs();
         return ResponseEntity.ok().build();
     }
 }

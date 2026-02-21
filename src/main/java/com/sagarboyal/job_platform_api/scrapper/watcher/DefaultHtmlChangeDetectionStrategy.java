@@ -31,7 +31,6 @@ public class DefaultHtmlChangeDetectionStrategy implements ChangeDetectionStrate
                 .timeout(10000)
                 .get();
 
-        // 1️⃣ Determine content container
         Element content;
 
         if (contentSelector != null && !contentSelector.isBlank()) {

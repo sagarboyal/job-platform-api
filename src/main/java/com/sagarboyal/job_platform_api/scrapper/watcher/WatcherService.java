@@ -18,14 +18,7 @@ public class WatcherService {
                               String ignoreSelector) {
 
         try {
-            boolean changed = changeDetectionStrategy.hasChanged(provider, contentSelector, ignoreSelector);
-            if (changed) {
-                log.info("Change detected for provider: {}", provider.name());
-            } else {
-                log.debug("No change for provider: {}", provider.name());
-            }
-            return changed;
-
+            return changeDetectionStrategy.hasChanged(provider, contentSelector, ignoreSelector);
         } catch (IOException e) {
             log.error("Watcher failed for provider: {}", provider.name(), e);
             return false;

@@ -33,22 +33,16 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public List<JobDto> addBulkJobs(List<JobDto> bulkData) {
-        Set<String> usedCodesInBatch = new HashSet<>();
         List<JobDto> savedJobs = new ArrayList<>();
-
         for (JobDto jobDto : bulkData) {
             try {
                 Job job = jobMapper.toEntity(jobDto);
-                String code = jobCodeGenerator.generate(jobDto, usedCodesInBatch);
-                usedCodesInBatch.add(code);
-                job.setAdvertisementNo(code);
                 savedJobs.add(jobMapper.toResponse(jobRepository.save(job)));
             } catch (DataIntegrityViolationException ex) {
                 log.warn("Skipping duplicate job: {} from provider: {}",
-                        jobDto.title(), jobDto.providerName());
+                        jobDto.getTitle(), jobDto.getProviderName());
             }
         }
-
         return savedJobs;
     }
 }

@@ -16,26 +16,26 @@ public class JobCodeGenerator {
     private final JobRepository jobRepository;
 
     public String generate(JobDto dto, Set<String> usedInBatch) {
-        String provider = safe(dto.providerName());
+        String provider = safe(dto.getProviderName());
 
-        if (hasText(dto.advertisementNo())) {
-            String code = provider + "-" + clean(dto.advertisementNo());
-            return ensureUnique(dto.providerName(), code, usedInBatch);
+        if (hasText(dto.getAdvertisementNo())) {
+            String code = provider + "-" + clean(dto.getProviderName());
+            return ensureUnique(dto.getProviderName(), code, usedInBatch);
         }
 
-        if (hasText(dto.sourceUrl())) {
-            String code = provider + "-" + shortHash(dto.sourceUrl());
-            return ensureUnique(dto.providerName(), code, usedInBatch);
+        if (hasText(dto.getSourceUrl())) {
+            String code = provider + "-" + shortHash(dto.getSourceUrl());
+            return ensureUnique(dto.getProviderName(), code, usedInBatch);
         }
 
         String fingerprintData =
-                safe(dto.title()) +
-                        safe(dto.organization()) +
-                        safe(dto.jobLocation()) +
-                        safe(dto.category()) +
-                        (dto.lastDate() != null ? dto.lastDate().toString() : "");
+                safe(dto.getTitle()) +
+                        safe(dto.getOrganization()) +
+                        safe(dto.getJobLocation()) +
+                        safe(dto.getCategory()) +
+                        (dto.getLastDate() != null ? dto.getLastDate().toString() : "");
 
-        return ensureUnique(dto.providerName(), provider + "-" + shortHash(fingerprintData), usedInBatch);
+        return ensureUnique(dto.getProviderName(), provider + "-" + shortHash(fingerprintData), usedInBatch);
     }
 
     public String generate(JobDto dto) {
