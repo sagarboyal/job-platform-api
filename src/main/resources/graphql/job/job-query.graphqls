@@ -1,0 +1,4 @@
+extend type Query {
+    getJob(id: ID!): Job
+    getAllJob: [Job]
+}

@@ -7,4 +7,6 @@ import java.util.List;
 public interface JobService {
     JobDto createJob(JobDto jobDto);
     List<JobDto> addBulkJobs(List<JobDto> bulkData);
+    JobDto findJobById(Long id);
+    List<JobDto> findAllJobs();
 }

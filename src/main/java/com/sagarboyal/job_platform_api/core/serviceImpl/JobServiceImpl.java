@@ -43,4 +43,14 @@ public class JobServiceImpl implements JobService {
         }
         return savedJobs;
     }
+
+    @Override
+    public JobDto findJobById(Long id) {
+        return jobMapper.toResponse(jobRepository.findById(id).orElse(null));
+    }
+
+    @Override
+    public List<JobDto> findAllJobs() {
+        return jobRepository.findAll().stream().map(jobMapper::toResponse).toList();
+    }
 }

@@ -1,0 +1,34 @@
+type Job {
+    id: ID
+    advertisementNo: String
+    title: String
+    organization: String
+    providerName: String
+    jobLocation: String
+    qualification: String
+    totalVacancies: Int
+    startDate: Date
+    lastDate: Date
+    postedDate: Date
+    officialNotificationUrl: String
+    sourceUrl: String
+    providerUrl: String
+    description: String
+    status: JobStatus
+    category: String
+    employmentType: EmploymentType
+    createdAt: String
+    updatedAt: String
+}
+
+enum JobStatus {
+    ACTIVE,
+    EXPIRED
+}
+
+enum EmploymentType {
+    PERMANENT,
+    CONTRACT,
+    APPRENTICE,
+    TEMPORARY,
+}
