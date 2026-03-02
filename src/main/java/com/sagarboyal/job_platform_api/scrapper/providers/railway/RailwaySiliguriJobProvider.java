@@ -82,7 +82,7 @@ public class RailwaySiliguriJobProvider implements JobProvider {
 
     @Override
     public String providerName() {
-        return "RAILWAY-SILIGURI";
+        return "RAILWAY_SILIGURI";
     }
 
     private JobDto buildResponse(Element subDiv, String URL) {
