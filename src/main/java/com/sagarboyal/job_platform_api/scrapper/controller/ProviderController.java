@@ -1,6 +1,8 @@
 package com.sagarboyal.job_platform_api.scrapper.controller;
 
+import com.sagarboyal.job_platform_api.constants.AppConstants;
 import com.sagarboyal.job_platform_api.core.service.JobProcessingService;
+import com.sagarboyal.job_platform_api.payload.PagedResponse;
 import com.sagarboyal.job_platform_api.scrapper.payload.dtos.ProviderDTO;
 import com.sagarboyal.job_platform_api.scrapper.service.ProviderService;
 import lombok.RequiredArgsConstructor;
@@ -17,8 +19,11 @@ public class ProviderController {
     private final JobProcessingService jobProcessingService;
 
     @GetMapping
-    public ResponseEntity<List<ProviderDTO>> getAllProviders() {
-        return ResponseEntity.ok(providerService.getAll());
+    public ResponseEntity<PagedResponse<ProviderDTO>> getAllProviders(
+            @RequestParam Integer page,
+            @RequestParam Integer size
+    ) {
+        return ResponseEntity.ok(providerService.getAll(page, size));
     }
 
     @PostMapping
