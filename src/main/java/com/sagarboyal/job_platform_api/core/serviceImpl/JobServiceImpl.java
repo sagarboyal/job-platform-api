@@ -1,6 +1,8 @@
 package com.sagarboyal.job_platform_api.core.serviceImpl;
 
+import com.sagarboyal.job_platform_api.constants.AppConstants;
 import com.sagarboyal.job_platform_api.core.dto.JobDto;
+import com.sagarboyal.job_platform_api.payload.PagedResponse;
 import com.sagarboyal.job_platform_api.core.entity.Job;
 import com.sagarboyal.job_platform_api.core.mapper.JobMapper;
 import com.sagarboyal.job_platform_api.core.repository.JobRepository;
@@ -9,6 +11,8 @@ import com.sagarboyal.job_platform_api.core.service.JobService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -50,7 +54,21 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public List<JobDto> findAllJobs() {
-        return jobRepository.findAll().stream().map(jobMapper::toResponse).toList();
+    public PagedResponse<JobDto> findJobs(Integer page, Integer size) {
+        page = page == null ? AppConstants.DEFAULT_PAGE_NUMBER : page;
+        size = size == null ? AppConstants.DEFAULT_PAGE_SIZE : size;
+
+        Page<Job> jobPage = jobRepository.findAll(PageRequest.of(page, size));
+        List<JobDto> content = jobPage.getContent().stream().map(jobMapper::toResponse).toList();
+
+        return PagedResponse.<JobDto>builder()
+                .content(content)
+                .page(jobPage.getNumber())
+                .size(jobPage.getSize())
+                .totalElements(Math.toIntExact(jobPage.getTotalElements()))
+                .totalPages(jobPage.getTotalPages())
+                .hasNext(jobPage.hasNext())
+                .hasPrevious(jobPage.hasPrevious())
+                .build();
     }
 }

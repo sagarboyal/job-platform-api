@@ -1,4 +1,4 @@
 extend type Query {
     getJob(id: ID!): Job
-    getAllJob: [Job]
+    getAllJob(page: Int = 0, size: Int = 20): JobPagedResponse
 }

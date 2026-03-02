@@ -21,6 +21,16 @@ type Job {
     updatedAt: String
 }
 
+type JobPagedResponse {
+    content: [Job]
+    page: Int
+    size: Int
+    totalElements: Int
+    totalPages: Int
+    hasNext: Boolean
+    hasPrevious: Boolean
+}
+
 enum JobStatus {
     ACTIVE,
     EXPIRED
