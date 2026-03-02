@@ -1,4 +1,11 @@
 extend type Query {
     getJob(id: ID!): Job
     getAllJob(page: Int = 0, size: Int = 20): JobPagedResponse
+    searchJobs(
+        search: String
+        filter: JobFilterInput
+        page: Int = 0
+        size: Int = 20
+        sort: JobSortInput
+    ): JobPagedResponse
 }

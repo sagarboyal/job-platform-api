@@ -1,6 +1,8 @@
 package com.sagarboyal.job_platform_api.core.graphql;
 
 import com.sagarboyal.job_platform_api.core.dto.JobDto;
+import com.sagarboyal.job_platform_api.core.dto.JobFilterInput;
+import com.sagarboyal.job_platform_api.core.dto.JobSortInput;
 import com.sagarboyal.job_platform_api.payload.PagedResponse;
 import com.sagarboyal.job_platform_api.core.service.JobService;
 import lombok.RequiredArgsConstructor;
@@ -21,5 +23,14 @@ public class GraphQLController {
     @QueryMapping
     public PagedResponse<JobDto> getAllJob(@Argument Integer page, @Argument Integer size) {
         return jobService.findJobs(page, size);
+    }
+
+    @QueryMapping
+    public PagedResponse<JobDto> searchJobs(@Argument String search,
+                                            @Argument JobFilterInput filter,
+                                            @Argument Integer page,
+                                            @Argument Integer size,
+                                            @Argument JobSortInput sort) {
+        return jobService.searchJobs(search, filter, page, size, sort);
     }
 }

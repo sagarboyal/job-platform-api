@@ -31,6 +31,36 @@ type JobPagedResponse {
     hasPrevious: Boolean
 }
 
+input JobFilterInput {
+    providerName: String
+    status: JobStatus
+    category: String
+    employmentType: EmploymentType
+    location: String
+    postedFrom: Date
+    postedTo: Date
+    createdFrom: DateTime
+    createdTo: DateTime
+    updatedFrom: DateTime
+    updatedTo: DateTime
+}
+
+input JobSortInput {
+    field: JobSortField
+    direction: SortDirection
+}
+
+enum JobSortField {
+    POSTED_DATE,
+    CREATED_AT,
+    TITLE
+}
+
+enum SortDirection {
+    ASC,
+    DESC
+}
+
 enum JobStatus {
     ACTIVE,
     EXPIRED

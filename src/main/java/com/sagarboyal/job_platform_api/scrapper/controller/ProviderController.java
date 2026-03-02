@@ -1,6 +1,5 @@
 package com.sagarboyal.job_platform_api.scrapper.controller;
 
-import com.sagarboyal.job_platform_api.constants.AppConstants;
 import com.sagarboyal.job_platform_api.core.service.JobProcessingService;
 import com.sagarboyal.job_platform_api.payload.PagedResponse;
 import com.sagarboyal.job_platform_api.scrapper.payload.dtos.ProviderDTO;
