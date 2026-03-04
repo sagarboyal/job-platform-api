@@ -1,0 +1,74 @@
+type Job {
+    id: ID
+    advertisementNo: String
+    title: String
+    organization: String
+    providerName: String
+    jobLocation: String
+    qualification: String
+    totalVacancies: Int
+    startDate: Date
+    lastDate: Date
+    postedDate: Date
+    officialNotificationUrl: String
+    sourceUrl: String
+    providerUrl: String
+    description: String
+    status: JobStatus
+    category: String
+    employmentType: EmploymentType
+    createdAt: String
+    updatedAt: String
+}
+
+type JobPagedResponse {
+    content: [Job]
+    page: Int
+    size: Int
+    totalElements: Int
+    totalPages: Int
+    hasNext: Boolean
+    hasPrevious: Boolean
+}
+
+input JobFilterInput {
+    providerName: String
+    status: JobStatus
+    category: String
+    employmentType: EmploymentType
+    location: String
+    postedFrom: Date
+    postedTo: Date
+    createdFrom: DateTime
+    createdTo: DateTime
+    updatedFrom: DateTime
+    updatedTo: DateTime
+}
+
+input JobSortInput {
+    field: JobSortField
+    direction: SortDirection
+}
+
+enum JobSortField {
+    POSTED_DATE,
+    CREATED_AT,
+    TITLE
+}
+
+enum SortDirection {
+    ASC,
+    DESC
+}
+
+enum JobStatus {
+    ACTIVE,
+    EXPIRED
+}
+
+enum EmploymentType {
+    PERMANENT,
+    CONTRACT,
+    APPRENTICE,
+    TEMPORARY,
+}

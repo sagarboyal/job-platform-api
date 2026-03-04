@@ -1,6 +1,8 @@
 package com.sagarboyal.job_platform_api.scrapper.serviceImpl;
 
+import com.sagarboyal.job_platform_api.constants.AppConstants;
 import com.sagarboyal.job_platform_api.exception.custom.APIExceptions;
+import com.sagarboyal.job_platform_api.payload.PagedResponse;
 import com.sagarboyal.job_platform_api.scrapper.mapper.ProviderMapper;
 import com.sagarboyal.job_platform_api.scrapper.modal.Provider;
 import com.sagarboyal.job_platform_api.scrapper.payload.dtos.ProviderDTO;
@@ -9,6 +11,8 @@ import com.sagarboyal.job_platform_api.scrapper.service.ProviderService;
 import com.sagarboyal.job_platform_api.utils.AppUtils;
 import com.sagarboyal.job_platform_api.utils.StringUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -106,11 +110,27 @@ public class ProviderServiceImpl implements ProviderService {
     }
 
     @Override
-    public List<ProviderDTO> getAll() {
-        return providerRepository.findAll()
+    public PagedResponse<ProviderDTO> getAll(Integer page, Integer size) {
+        page = page == null ? AppConstants.DEFAULT_PAGE_NUMBER : page;
+        size = size == null ? AppConstants.DEFAULT_PAGE_SIZE : size;
+
+        PageRequest providerPage = PageRequest.of(page, size);
+        Page<Provider> resultPage = providerRepository.findAll(providerPage);
+
+        List<ProviderDTO> content = resultPage
                 .stream()
                 .map(providerMapper::toResponse)
                 .toList();
+
+        return PagedResponse.<ProviderDTO>builder()
+                .content(content)
+                .page(resultPage.getNumber())
+                .size(resultPage.getSize())
+                .totalElements((int) resultPage.getTotalElements())
+                .totalPages(resultPage.getTotalPages())
+                .hasNext(resultPage.hasNext())
+                .hasPrevious(resultPage.hasPrevious())
+                .build();
     }
 
     @Override
